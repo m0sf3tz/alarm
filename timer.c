@@ -134,7 +134,6 @@ static void insertStaticLinkedList(uint32_t time, void (*callBackFun)(void))
         //lets get a free node and populate it correctly. 
         uint8_t insertIndex = popHeadStaticFreeLinkedList();
         
-        printf("free index is: %d \n", insertIndex);   
         
         //insertion into last node must be taken care of by addding sentilel value
         if(iterIndexlead == NULL_SENTINEL)
