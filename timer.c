@@ -125,7 +125,6 @@ static void insertStaticLinkedList(uint32_t time, void (*callBackFun)(void))
             //break, we got to end of list     
             if(iterIndexlead == NULL_SENTINEL)
             {
-
                 break;   
             } 
         }
@@ -147,7 +146,7 @@ static void insertStaticLinkedList(uint32_t time, void (*callBackFun)(void))
                 callBackArr[insertIndex].next          = callBackArr[iterIndexlead].next;
         }
 
-
+        //set up newly created node in the used array
         callBackArr[insertIndex].callBackFun   = callBackFun;
         callBackArr[insertIndex].ticks         = time;
         callBackArr[insertIndex].used          = true;
@@ -185,7 +184,6 @@ static void intTimer0()
             {
                 break;   
             }
-            
         }
     }    
 }
@@ -222,7 +220,7 @@ bool requestAlarm(uint32_t delay, void (*callBackFun)(void))
     
     //start critical section
     
-    halIrq_disable(timer0);   //we need to do this so we can gurantee that we have atomic 
+    halIrq_disable(timer0);   //we need to do this so we can gurantee that we have atomic access to variables used inside IRQ
                                
                                 //assumption is that this critical region is FAST, and it will be since we are only dealing with 64 long linked list at WORST.
                                 //the approach that will follow will have O(N) insertion time, but 0(1) deletion count. since our 0(1) time will be in an IRQ
@@ -234,7 +232,7 @@ bool requestAlarm(uint32_t delay, void (*callBackFun)(void))
     insertStaticLinkedList(alarmTime, callBackFun);
     
     //exit critical section
-    halIrq_enable(timer0);   //we need to do this so we can gurantee that we have atomic 
+    halIrq_enable(timer0);   
     
     return true;
 }
