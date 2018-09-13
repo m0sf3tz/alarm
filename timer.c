@@ -2,6 +2,8 @@
 #include <stdbool.h>
 #include <timer.h>
 
+#include "timerHal.h" 
+#include "irqHal.h"  
 
 //varabiale to keep track of time, will
 //increment at every tic
@@ -19,14 +21,14 @@ void initAlarm()
 {
     //set up IRQs, Timers, interrupts, etc.. lets pretend we have timer0 we are using
  
-    //HalIrqInstall(TIMER0) <- or something like this, etc...
-    //HalTimerSet(TIMER0,MODE_COUNT_DOWN | AUTO_RELOAD);
-    //HalTimerPeriod(TIMER0,1_MS_PERIOD); //1ms period request
-    //HalTimerEnableIrq(TIMER0);
-    //HalTimerStart(TIMER0);  //finally kick off the timer
+    HalIrqInstall(TIMER0) <- or something like this, etc...
+    HalTimerSet(TIMER0,MODE_COUNT_DOWN | AUTO_RELOAD);
+    HalTimerPeriod(TIMER0,1_MS_PERIOD); //1ms period request
+    HalTimerEnableIrq(TIMER0);
+    HalTimerStart(TIMER0);  //finally kick off the timer
     
-    //Mark all of our linked-list as free
-    //for simlpicity, index 0 will be the head of our free list
+    Mark all of our linked-list as free
+    for simlpicity, index 0 will be the head of our free list
     
     
     //go through the and put every element in the free list
